@@ -18,22 +18,21 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper=false)
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-public class Employee {
-	
+public class Employee extends Person {
+		
 	@ManyToOne
-	@JoinColumn(name = "employeeid", insertable = false, updatable = false)
+	@JoinColumn(name="employeetypeid", insertable=false, updatable=false)
 	private EmployeeType employeeType;
-	private Integer employeeid;
+	private Integer employeetypeid;
 	private String photo;
 	private String username;
 	
 	@ManyToOne
-	@JoinColumn(name = "jobtitleid", insertable = false, updatable = false)
+	@JoinColumn(name="jobtitleid", insertable=false, updatable=false)
 	private JobTitle jobTitle;
 	private Integer jobtitleid;
 	
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")	
 	private Date hireDate;
-	
-
 }
+
