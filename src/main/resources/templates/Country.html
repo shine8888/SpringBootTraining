@@ -421,7 +421,8 @@
                     <td th:text="${country.description}"></td>
                     <td>
                     <div class="btn-group">
-                    <a th:href="@{/countries/(${country.id})}" class="btn btn-primary" id="editButton">Edit</a>
+                    <a th:href="@{/countries/findById/(id=${country.id})}" class="btn btn-primary" id="editButton">Edit</a>
+                    <a th:href="@{/countries/delete/(id=${country.id})}" class="btn btn-primary" id="deleteButton">Delete</a>
                     </div>
                     </td>
                   </tr>
@@ -508,31 +509,36 @@
         </button>
       </div>
       <div class="modal-body">
-        <form th:action="@{/countries/update}" method="POST">
+        <form th:action="@{/countries/update}" method="put">
         
+        <div class="form-group">
+            <label for="recipient-name" class="col-form-label">ID</label>
+            <input type="text" class="form-control" id="idEdit" name="id">
+          </div>
+          
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">Capital</label>
-            <input type="text" class="form-control" id="capitalEdit" name="capital" value="${country.capital}">
+            <input type="text" class="form-control" id="capitalEdit" name="capital">
           </div>
           
            <div class="form-group">
             <label for="recipient-name" class="col-form-label">Code</label>
-            <input type="text" class="form-control" id="codeEdit" name="code" value="${country.code}">
+            <input type="text" class="form-control" id="codeEdit" name="code">
           </div>
           
            <div class="form-group">
             <label for="recipient-name" class="col-form-label">Continent</label>
-            <input type="text" class="form-control" id="continentEdit" name="continent" value="${country.continent}">
+            <input type="text" class="form-control" id="continentEdit" name="continent">
           </div>
           
            <div class="form-group">
             <label for="recipient-name" class="col-form-label">Description</label>
-            <input type="text" class="form-control" id="descriptionEdit" name="description" value="${country.description}">
+            <input type="text" class="form-control" id="descriptionEdit" name="description">
           </div>
           
            <div class="form-group">
             <label for="recipient-name" class="col-form-label">Nationality</label>
-            <input type="text" class="form-control" id="nationalityEdit" name="nationality" value="${country.nationality}">
+            <input type="text" class="form-control" id="nationalityEdit" name="nationality">
           </div>
           
             <div class="form-group">
@@ -547,6 +553,29 @@
     </div>
   </div>
 </div>
+
+/* Delete modal */
+   
+   <div class="modal" id="deleteModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Confirm Delete</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure to delete this record?</p>
+      </div>
+      <div class="modal-footer">
+        <a id="confirmDeleteButton" href="/countries/delete" class="btn btn-primary">Save changes</a>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
   <!-- javascripts -->
   <script src="js/jquery.js"></script>
    <script src="js/country.js"></script>

@@ -28,4 +28,8 @@ public class CountryService {
 	public Optional<Country> getCountryById(int id) {
 		return countryRepository.findById(id);
 	}
+	
+	public void deleteCountry(int id) {
+		countryRepository.deleteById(id);
+	}
 }

@@ -1,16 +1,17 @@
 package com.main.controllers;
 
 import java.util.List;
+import java.util.Optional;
 
-import org.hibernate.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.main.models.Country;
 import com.main.services.CountryService;
@@ -34,10 +35,23 @@ public class CountryController {
 		return "redirect:/countries";
 	}
 
-	@RequestMapping(value = "/countries/{id}", method = { RequestMethod.POST, RequestMethod.GET})
-	public void findCountryById(@Parameter("id") String id, Model model) {
-		int code = Integer.parseInt(id);
-		System.out.println(id+ "QUanggggggggggggggggggggg");
-		model.addAttribute("country", countryService.getCountryById(code));
+	@RequestMapping("/countries/findById")
+	@ResponseBody
+	public Optional<Country> findCountryById(int id, Model model) {
+		
+		
+		return countryService.getCountryById(id);
+	}
+	
+	@RequestMapping(value="/countries/update", method= {RequestMethod.PUT, RequestMethod.GET})
+	public String update(Country country) {
+		countryService.saveNewCountry(country);
+		return "redirect:/countries";
+	}
+	
+	@RequestMapping(value="/countries/delete", method= {RequestMethod.PUT, RequestMethod.GET})
+	public String delete(int id) {
+		countryService.deleteCountry(id);
+		return "redirect:/countries";
 	}
 }
